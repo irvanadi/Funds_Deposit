@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">UTS Android</string>
+
+    <string-array name="jenis">
+        <item>Kredit</item>
+        <item>Debit</item>
+    </string-array>
+</resources>
