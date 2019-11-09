@@ -16,7 +16,7 @@ public class ReportsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reports);
 
         Intent intent = getIntent();
-
+        this.setTitle("Your Report");
         totaltrans = findViewById(R.id.txtInputTrans);
         debit = findViewById(R.id.txtInputDebit);
         kredit = findViewById(R.id.txtInputKredit);

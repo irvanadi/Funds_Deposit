@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:layout_margin="16dp"
+    android:padding="16dp"
     android:fitsSystemWindows="true">
 
     <TextView
@@ -40,6 +40,7 @@
         android:id="@+id/edDescription"
         android:layout_width="320dp"
         android:layout_marginStart="16dp"
+        android:textSize="16sp"
         android:layout_height="wrap_content"
         android:hint="Your Description"
         app:layout_constraintTop_toBottomOf="@id/txtInputTanggal"
@@ -57,12 +58,12 @@
 
     <Spinner
         android:id="@+id/spnJenis"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:entries="@array/jenis"
-        android:layout_marginStart="16dp"
-        app:layout_constraintTop_toBottomOf="@id/edDescription"
-        app:layout_constraintStart_toEndOf="@id/txtJenis"/>
+        app:layout_constraintStart_toEndOf="@id/txtJenis"
+        app:layout_constraintTop_toBottomOf="@id/edDescription" />
 
     <TextView
         android:id="@+id/txtNominal"
@@ -79,6 +80,7 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:hint="Rp. "
+        android:textSize="16sp"
         android:inputType="number"
         app:layout_constraintTop_toBottomOf="@id/spnJenis"
         android:layout_marginStart="16dp"
@@ -92,6 +94,8 @@
         android:textAllCaps="false"
         android:layout_marginEnd="16dp"
         android:text="Add"
+        android:background="@android:color/holo_orange_dark"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toStartOf="@id/btnReport"
         app:layout_constraintStart_toStartOf="parent"
         />
@@ -103,6 +107,8 @@
         app:layout_constraintTop_toBottomOf="@id/edNominal"
         android:textAllCaps="false"
         android:layout_marginStart="16dp"
+        android:background="@android:color/holo_orange_dark"
+        android:textColor="@android:color/white"
         android:text="Report"
         app:layout_constraintStart_toEndOf="@id/btnAdd"
         app:layout_constraintEnd_toEndOf="parent"

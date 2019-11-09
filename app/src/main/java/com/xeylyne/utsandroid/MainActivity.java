@@ -105,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
                 NominalKredit += tabungan.getNominal();
             }
         }
+        
+        total = NominalDebit - NominalKredit;
         Intent intent = new Intent(MainActivity.this, ReportsActivity.class);
         intent.putExtra("trans",results.size());
         intent.putExtra("debit", NominalDebit);
