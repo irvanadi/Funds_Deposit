@@ -1,42 +1,37 @@
-package com.xeylyne.utsandroid;
+package com.xeylyne.utsandroid.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextClock;
-import android.widget.TextView;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import com.google.android.material.snackbar.Snackbar;
+import com.xeylyne.utsandroid.R;
+import com.xeylyne.utsandroid.Class.Tabungan;
+import com.xeylyne.utsandroid.Adapter.TabunganAdapter;
+
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    TextView txtTanggal;
     Spinner spnJenis;
     EditText edUraian, edNominal;
     TabunganAdapter tabunganAdapter;
     String SpinnerJenis;
-    DateFormat dateFormat;
-    Date date;
     int NominalDebit, NominalKredit ;
+    ConstraintLayout constraintLayout;
 
     ArrayList<Tabungan> results = new ArrayList<>();
-    ArrayList<Tabungan> reports = new ArrayList<>();
     TextClock textClock;
 
     @Override
@@ -44,32 +39,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        this.setTitle("Personal Accounting - 17410100123");
+
         recyclerView = findViewById(R.id.recTabungan);
         spnJenis = findViewById(R.id.spnJenis);
         edUraian = findViewById(R.id.edDescription);
         edNominal = findViewById(R.id.edNominal);
         textClock = findViewById(R.id.txtInputTanggal);
+        constraintLayout = findViewById(R.id.ConstraintLayout);
 
-        date = new Date();
-        dateFormat = new SimpleDateFormat("dd MMM yyyy, hh:mm:ss");
         tabunganAdapter = new TabunganAdapter(MainActivity.this, results);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(tabunganAdapter);
 
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                txtTanggal.setText(dateFormat.format(date));
-//            }
-//        },1000);
-//
-
         findViewById(R.id.btnAdd).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                load();
+                checkInput();
             }
         });
 
@@ -81,7 +69,20 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void load(){
+    public void checkInput(){
+        if (edUraian.getText().length() == 0){
+            Snackbar snackbar = Snackbar.make(constraintLayout, "Tolong Input Uraian Terlebih Dahulu", Snackbar.LENGTH_SHORT);
+            snackbar.show();
+        } else if (edNominal.getText().length() == 0){
+            Snackbar snackbar = Snackbar.make(constraintLayout, "Tolong Input Nominal Terlebih Dahulu", Snackbar.LENGTH_SHORT);
+            snackbar.show();
+        }
+        else {
+            SaveData();
+        }
+    }
+
+    public void SaveData(){
         SpinnerJenis = spnJenis.getSelectedItem().toString();
         Tabungan tabungan = new Tabungan();
         tabungan.setJenis(SpinnerJenis);
@@ -89,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
         tabungan.setUraian(edUraian.getText().toString());
         tabungan.setTanggal(textClock.getText().toString());
         results.add(tabungan);
+        Snackbar snackbar = Snackbar.make(constraintLayout, "Data Berhasil di Input", Snackbar.LENGTH_SHORT);
+        snackbar.show();
         tabunganAdapter = new TabunganAdapter(MainActivity.this, results);
         recyclerView.setAdapter(tabunganAdapter);
     }
@@ -105,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 NominalKredit += tabungan.getNominal();
             }
         }
-        
+
         total = NominalDebit - NominalKredit;
         Intent intent = new Intent(MainActivity.this, ReportsActivity.class);
         intent.putExtra("trans",results.size());

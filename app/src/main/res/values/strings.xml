@@ -2,7 +2,7 @@
     <string name="app_name">UTS Android</string>
 
     <string-array name="jenis">
-        <item>Kredit</item>
         <item>Debit</item>
+        <item>Kredit</item>
     </string-array>
 </resources>

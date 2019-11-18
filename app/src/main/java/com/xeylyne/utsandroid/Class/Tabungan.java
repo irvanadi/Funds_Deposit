@@ -1,4 +1,4 @@
-package com.xeylyne.utsandroid;
+package com.xeylyne.utsandroid.Class;
 
 public class Tabungan {
     String tanggal, uraian, jenis;

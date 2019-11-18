@@ -1,4 +1,4 @@
-package com.xeylyne.utsandroid;
+package com.xeylyne.utsandroid.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,9 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.xeylyne.utsandroid.Class.Tabungan;
+import com.xeylyne.utsandroid.R;
 
 import java.util.ArrayList;
 
